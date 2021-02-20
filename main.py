@@ -13,10 +13,10 @@ import random
 import func
 
 now_cwd = os.path.abspath(os.path.dirname(__file__))
-cfg_dir = os.path.join(now_cmd, "config")
-cfg_cwd = os.path.join(now_cmd, "config/db.conf")
-log_dir = os.path.join(now_cmd, "logs")
-log_cwd = os.path.join(now_cmd, "logs/t.log")
+cfg_dir = os.path.join(now_cwd, "config")
+cfg_cwd = os.path.join(now_cwd, "config/db.conf")
+log_dir = os.path.join(now_cwd, "logs")
+log_cwd = os.path.join(now_cwd, "logs/t.log")
 
 ad = AlphabetDetector()
 if not os.path.exists(cfg_dir):
