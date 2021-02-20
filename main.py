@@ -33,7 +33,7 @@ if not os.path.exists(cfg_dir):
     File_object.close()
     File_object = open("config/token.conf", "w+")
     token = input("Telegram token: ")
-    while not re.match("[0-9]{9}:[a-zA-Z0-9_-]{35}", token):
+    while not re.match("[0-9]{10}:[a-zA-Z0-9_-]{35}", token):
         token = input("Invalid token. Telegram token: ")
     File_object.write(token)
     File_object.close()
@@ -41,7 +41,7 @@ if not os.path.exists(cfg_dir):
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
 TOKEN = open(cfg_cwd, 'r').read().replace("\n", "")
-if not re.match("[0-9]{9}:[a-zA-Z0-9_-]{35}", TOKEN):
+if not re.match("[0-9]{10}:[a-zA-Z0-9_-]{35}", TOKEN):
     input("The token seems to be an invalid format")
     exit(0)
 message_counter = 0
