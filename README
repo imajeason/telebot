@@ -1,6 +1,12 @@
+
+
 Install Mariadb/Mysql
 Install python 3.6+
-Run setup.py install
+python3 setup.py install
+
+python3 main.py
+# db name is telegram
+
 Get your telegram token from the Bot Father on telegram
 Run main.py, inputting necessary details
 Enjoy!
