@@ -15,6 +15,7 @@ import func
 now_cwd = os.path.abspath(os.path.dirname(__file__))
 cfg_dir = os.path.join(now_cwd, "config")
 cfg_cwd = os.path.join(now_cwd, "config/db.conf")
+token_cwd = os.path.join(now_cwd, "config/token.conf")
 log_dir = os.path.join(now_cwd, "logs")
 log_cwd = os.path.join(now_cwd, "logs/t.log")
 
@@ -31,7 +32,7 @@ if not os.path.exists(cfg_dir):
     database = input("Database name: ")
     File_object.write("database=" + database)
     File_object.close()
-    File_object = open("config/token.conf", "w+")
+    File_object = open(token_cwd, "w+")
     token = input("Telegram token: ")
     while not re.match("[0-9]{10}:[a-zA-Z0-9_-]{35}", token):
         token = input("Invalid token. Telegram token: ")
@@ -40,7 +41,7 @@ if not os.path.exists(cfg_dir):
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
-TOKEN = open(cfg_cwd, 'r').read().replace("\n", "")
+TOKEN = open(token_cwd, 'r').read().replace("\n", "")
 if not re.match("[0-9]{10}:[a-zA-Z0-9_-]{35}", TOKEN):
     input("The token seems to be an invalid format")
     exit(0)
