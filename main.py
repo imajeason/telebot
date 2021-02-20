@@ -12,10 +12,16 @@ import os
 import random
 import func
 
+now_cwd = os.path.abspath(os.path.dirname(__file__))
+cfg_dir = os.path.join(now_cmd, "config")
+cfg_cwd = os.path.join(now_cmd, "config/db.conf")
+log_dir = os.path.join(now_cmd, "logs")
+log_cwd = os.path.join(now_cmd, "logs/t.log")
+
 ad = AlphabetDetector()
-if not os.path.exists("config"):
-    os.makedirs("config")
-    File_object = open("config/db.conf", "a+")
+if not os.path.exists(cfg_dir):
+    os.makedirs(cfg_dir)
+    File_object = open(cfg_cwd, "a+")
     host = input("Database host: ")
     File_object.write("host=" + host + "\n")
     user = input("Database user: ")
@@ -34,7 +40,7 @@ if not os.path.exists("config"):
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
-TOKEN = open('config/token.conf', 'r').read().replace("\n", "")
+TOKEN = open(cfg_cwd, 'r').read().replace("\n", "")
 if not re.match("[0-9]{9}:[a-zA-Z0-9_-]{35}", TOKEN):
     input("The token seems to be an invalid format")
     exit(0)
@@ -45,7 +51,7 @@ recent_messages = {'verified': {}, 'enter': {}, 'giveaways': {}, "welcome": {}}
 active_giveaway = False
 site_tld = ''
 
-File_object = open("config/db.conf", "r+")
+File_object = open(cfg_cwd, "r+")
 db_lines = File_object.readlines()
 db_host = db_lines[0].split("=", 1)[1].replace("\n", "").strip()
 db_user = db_lines[1].split("=", 1)[1].replace("\n", "").strip()
@@ -56,8 +62,8 @@ print("<" + db_user + ">")
 print("<" + db_pass + ">")
 print("<" + db_db + ">")
 
-if not os.path.exists("logs"):
-    os.makedirs("logs")
+if not os.path.exists(log_dir):
+    os.makedirs(log_dir)
 
 
 def create_connection():
@@ -89,7 +95,7 @@ def send_typing_action(function):
 def error(update, context):
     """Log Errors caused by Updates."""
     logger.warning('Update "%s" caused error "%s"', update, context.error)
-    open("logs/error.txt", "w").write("\nupdate status: " + str(update) + "\nerror: " + str(context.error))
+    open(log_cwd, "w").write("\nupdate status: " + str(update) + "\nerror: " + str(context.error))
 
 
 def get_admin_ids(bot, chat_id):
